@@ -1,8 +1,15 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+from scraper import BebekCom
 # Website buraya gelir
-url= "www.lansinoh.com.tr"
+# burası bir fonksiyon olacak
+# bu fonksiyon dönüt olarak json dönecek
+# her scraper için ayrı bir scraper fonksiyonu yazılacak
+# bunların türlerine göre scrapera yönlendiricek 
+# scraperdan bir json alacak 
+# bu jsonu döndürecek
+url= "www.bebek.com"
 
 base_url = "https://" + url
 
@@ -19,6 +26,7 @@ def crawl_page(url):
         soup = BeautifulSoup(response.content, "html.parser")
         
         # Kuyruğa yeni bağlantılar ekler
+        comments = []
         links = []
         for link in soup.find_all("a", href=True):
             next_url = urljoin(url, link["href"])
@@ -35,6 +43,8 @@ while urls_to_visit:
         continue
     # if base_url in current_url :
     print(f"Crawling: {current_url}")
+    scrapedStruct = BebekCom(current_url)
+    print(scrapedStruct)
     new_links = crawl_page(current_url)
     visited_urls.add(current_url)
     urls_to_visit.extend(new_links)
