@@ -9,9 +9,8 @@ from scraper import BebekCom
 # bunların türlerine göre scrapera yönlendiricek 
 # scraperdan bir json alacak 
 # bu jsonu döndürecek
-url= "www.bebek.com"
 
-base_url = "https://" + url
+base_url =  "https://www.bebek.com"
 
 visited_urls = set()
 
@@ -41,11 +40,11 @@ while urls_to_visit:
     current_url = urls_to_visit.pop(0)  # ilk url çıkartır
     if current_url in visited_urls:
         continue
-    # if base_url in current_url :
-    print(f"Crawling: {current_url}")
-    scrapedStruct = BebekCom(current_url)
-    print(scrapedStruct)
-    new_links = crawl_page(current_url)
-    visited_urls.add(current_url)
-    urls_to_visit.extend(new_links)
+    if base_url in current_url :
+        print(f"Crawling: {current_url}")
+        scrapedStruct = BebekCom(current_url)
+        print(scrapedStruct ,"\n")
+        new_links = crawl_page(current_url)
+        visited_urls.add(current_url)
+        urls_to_visit.extend(new_links)
 print("Crawling biti.")
