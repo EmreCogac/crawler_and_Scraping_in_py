@@ -28,10 +28,12 @@ def BebekCom(url):
         for commentLi in commentsLi:
             commentArticle = commentLi.find("article")
             commentsAnsersLi = commentLi.find_all("li")
+            if not commentsAnsersLi:
+                return bebekComment
             commentName = commentArticle.find("b")
             commentParagraph = commentArticle.find("p")
-            print(commentName)
-            print(commentParagraph)
+            # print(commentName)
+            # print(commentParagraph)
             counter = 0
             for answer in commentsAnsersLi:
                 counter=counter+1
@@ -39,11 +41,10 @@ def BebekCom(url):
                 answerArticle = answer.find("article")   
                 answerName = answerArticle.find("b")   
                 answerParagraph = answerArticle.find("p")
-                print(answerName)
-                print(answerParagraph)
+                # print(answerName)
+                # print(answerParagraph)
                 bebekComment = BebekComment(commentName,"date",commentParagraph,BebekAnswer(answerName,"date",answerParagraph))
         return bebekComment
-    return bebekComment
     
         # artist_name_list_items = artist_name_list.find_all('div',class_='comment-body')
         # for artist_name in artist_name_list_items:

@@ -1,6 +1,6 @@
 from typing import NamedTuple
 
-
+#Bebek entitiyleri
 class BebekAnswer(NamedTuple):
     name: str 
     date: str 
