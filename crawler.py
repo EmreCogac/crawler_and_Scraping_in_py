@@ -1,7 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-from scraper import BebekCom
+from Scrapers.bebekScraper import BebekCom
+from Scrapers.bebekForumScraper import BebekForum
 # Website buraya gelir
 # burası bir fonksiyon olacak
 # bu fonksiyon dönüt olarak json dönecek
@@ -9,8 +10,9 @@ from scraper import BebekCom
 # bunların türlerine göre scrapera yönlendiricek 
 # scraperdan bir json alacak 
 # bu jsonu döndürecek
-
-base_url =  "https://www.bebek.com"
+# kadınlar klubü anneler kukubü
+# 
+base_url =  "https://forum.bebek.com"
 
 visited_urls = set()
 
@@ -40,9 +42,9 @@ while urls_to_visit:
     current_url = urls_to_visit.pop(0)  # ilk url çıkartır
     if current_url in visited_urls:
         continue
-    if base_url in current_url :
+    if current_url.startswith(base_url) and '#' not in current_url and "?" not in current_url:
         print(f"Crawling: {current_url}")
-        scrapedStruct = BebekCom(current_url)
+        scrapedStruct = BebekForum(current_url)
         print(scrapedStruct ,"\n")
         new_links = crawl_page(current_url)
         visited_urls.add(current_url)

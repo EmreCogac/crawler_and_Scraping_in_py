@@ -7,6 +7,14 @@ class BebekComment:
     date: str
     comment: str
     replies: List['BebekComment'] = field(default_factory=list)
+
+
+# Bebek yorumları tablosu ->
+#     name 
+#     date
+#     comment
+#     childId => fk name 
+
 # Normal listeden iç içe recursive liste ile ağaç yapısı oluşturulup daha stabil bir yapı oluşturulmuştur
 
 # from typing import NamedTuple
